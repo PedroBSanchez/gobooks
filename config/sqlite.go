@@ -3,6 +3,7 @@ package config
 import (
 	"os"
 
+	"github.com/PedroBSanchez/gobooks.git/schemas"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 )
@@ -38,11 +39,17 @@ func InitializeSQLite() (*gorm.DB, error) {
 	}
 
 	// Migrate schemas
-	//err = db.AutoMigrate(&schemas.Opening{})
-	//if err != nil {
-		//logger.ErrorF("sqlite automigration error; %v", err)
-		//return nil, err
-	//}
+
+	err = db.AutoMigrate(
+		&schemas.Author{},
+		&schemas.Book{},
+	)
+
+	if err != nil {
+		logger.ErrorF("sqlite automigration error: %v", err)
+		return nil, err
+	}
+
 
 	// Return DB
 	return db, nil
