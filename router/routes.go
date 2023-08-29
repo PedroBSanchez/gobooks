@@ -19,10 +19,12 @@ func initializeRoutes(router *gin.Engine) {
 
 	author := router.Group(basePath + "/author")
 	{
-		author.GET("/")
 		author.POST("/create", authorHandler.CreateAuthorHandler)
+		author.GET("/list", authorHandler.ListAuthorsHandler)
+		author.GET("/show",authorHandler.ShowAuthorHandler)
+		author.DELETE("/delete", authorHandler.DeleteAuthorHandler)
+		author.PUT("/update", authorHandler.UpdateAuthorHandler)
 	}
-
 
 	book := router.Group(basePath + "/book")
 	{
