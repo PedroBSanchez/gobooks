@@ -1,6 +1,9 @@
 package main
 
-import "github.com/PedroBSanchez/gobooks.git/config"
+import (
+	"github.com/PedroBSanchez/gobooks.git/config"
+	"github.com/PedroBSanchez/gobooks.git/router"
+)
 
 
 var (
@@ -9,10 +12,10 @@ var (
 
 
 func main () {
-
+	
+	
 	logger = config.GetLogger("main")
 
-	
 	// Initialize configs
 	err := config.Init()
 
@@ -22,8 +25,7 @@ func main () {
 	}
 
 	//Initialize Router
-
-	//router.Initialize()
+	router.InitializeRouter()
 
 
 	
