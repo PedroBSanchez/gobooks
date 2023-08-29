@@ -38,3 +38,36 @@ func (r *CreateAuthorRequest) Validate() error {
 	return nil
 }
 
+
+
+//Updated AuthorRequest 
+
+type UpdateAuthorRequest struct {
+	Name string `json:"name"`
+	Age int64 `json:"age"`
+}
+
+
+func (r *UpdateAuthorRequest) Validate() error {
+
+	if r.Age <= 0 && r.Name == "" {
+		return fmt.Errorf("param body is empty or malformed")
+	}
+
+	if r.Age <= 0 {
+		return errParamIsRequired("age", "int64")
+	}
+
+	if r.Name == "" {
+		return errParamIsRequired("name", "string")
+	}
+
+	return nil
+
+}
+
+
+
+
+
+
