@@ -42,3 +42,34 @@ func (r *CreateBookRequest) Validate() error{
 
 	return nil
 }
+
+
+type UpdateBookRequest struct {
+	Title string `json:"title"`
+	ReleaseDate string `json:"releaseDate"`
+	Pages int64 `json:"pages"`
+    AuthorID int64 `json:"authorID"`
+}
+
+
+func (r *UpdateBookRequest) Validate() error {
+	if r.Title == "" {
+		return errParamIsRequired("title", "string")
+	}
+
+	if r.Pages <= 0 {
+		return errParamIsRequired("pages", "int64")
+	}
+
+	now := time.Now()
+	timeDate, err := time.Parse(handler.CustomLayout, r.ReleaseDate)
+	if  err != nil || now.Before(timeDate){
+		return fmt.Errorf("Invalid date")
+	}
+
+	if r.AuthorID <= 0 {
+		return errParamIsRequired("authorID", "int64")
+	}
+
+	return nil
+}

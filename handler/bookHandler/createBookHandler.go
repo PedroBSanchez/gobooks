@@ -18,7 +18,6 @@ import (
 // @Accept json
 // @Produce json
 // @Param request body CreateBookRequest true "Request body"
-// @Param id query string true "Author identification"
 // @Success 200 {object} SuccessResponse
 // @Failure 400 {object} ErrorResponse
 // @Failure 500 {object} ErrorResponse

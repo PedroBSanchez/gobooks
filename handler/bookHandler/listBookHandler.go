@@ -23,7 +23,7 @@ func ListBookHandler (ctx *gin.Context) {
 
 	books := []schemas.Book{}
 
-	err := handler.Db.Find(&books).Error
+	err := handler.Db.Preload("Author").Find(&books).Error
 
 
 	if err != nil {
