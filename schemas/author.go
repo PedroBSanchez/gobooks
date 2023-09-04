@@ -12,6 +12,7 @@ type Author struct {
 	Name string
 	Age int64
 	AmountBooks int64
+	Books []Book `gorm:"foreignkey:AuthorID;constraint:OnDelete:CASCADE;"`
 }
 
 
