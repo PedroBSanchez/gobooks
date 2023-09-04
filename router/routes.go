@@ -30,7 +30,10 @@ func initializeRoutes(router *gin.Engine) {
 	book := router.Group(basePath + "/book")
 	{
 		book.POST("/create", bookhandler.CreateBookHandler)
-		book.GET("list", bookhandler.ListBookHandler)
+		book.GET("/list", bookhandler.ListBookHandler)
+		book.GET("/show", bookhandler.ShowBookHandler)
+		book.PUT("/update", bookhandler.UpdateBookHandler)
+		book.DELETE("/delete", bookhandler.DeleteBookHandler)
 	}
 
 	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerfiles.Handler))
