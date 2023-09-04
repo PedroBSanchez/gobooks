@@ -33,11 +33,16 @@ func DeleteAuthorHandler(ctx *gin.Context) {
 	author := schemas.Author{}
 
 	//Find author
-	err := handler.Db.First(&author, authorId).Error
+	err := handler.Db.Preload("Books").First(&author, authorId).Error
 
 	if err != nil {
 		handler.SendError(ctx, http.StatusNotFound, fmt.Sprintf("author with id: %s not found", authorId))
 		return
+	}
+
+	// Excluir os livros relacionados
+	for _, book := range author.Books {
+		handler.Db.Delete(&book)
 	}
 
 	//Delete author
